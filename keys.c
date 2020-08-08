@@ -43,10 +43,11 @@ int		ft_csale_picture(t_param *param, int button)
 		coeff = 1.0 / CAM_SCALE;
 	else
 		return (FALSE);
-	new_mouse.x = (param->mouse.x - CONST_WIDTH / 2) * coeff + CONST_WIDTH / 2;
-	new_mouse.y = (param->mouse.y - CONST_HEINTH / 2) * coeff + CONST_HEINTH / 2;
-	param->center.x += param->mouse.x - new_mouse.x;
-	param->center.y += param->mouse.y - new_mouse.y;
+	new_mouse.x = (param->mouse.x - param->center.x);
+	new_mouse.y = (param->mouse.y - param->center.y);
+
+	param->center.x += (new_mouse.x - new_mouse.x * coeff);
+	param->center.y += (new_mouse.y - new_mouse.y * coeff);
 	param->len *= coeff;
 	return (TRUE);
 }

@@ -88,9 +88,11 @@
 **	images
 */
 # define CONST_LEN 500
-# define CONST_RADIUS 1000
 # define CONST_WIDTH 500
-# define CONST_HEINTH 340
+# define CONST_HEINTH 500
+# define CONST_HW (((double)CONST_HEINTH) / CONST_WIDTH)
+
+
 # define CAM_X (CONST_WIDTH / 2)
 # define CAM_Y (CONST_HEINTH / 2)
 # define RADIUS 3

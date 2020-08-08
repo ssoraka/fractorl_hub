@@ -35,12 +35,12 @@ void	ft_test(int id, int *data, t_param *param) {
 	double m_x = param->center.x;
 	double m_y = param->center.y;
 	double zoom = param->len;
-	double dx = 0.1;
-	double dy = 0.1;
+	double dx = 0.0;
+	double dy = 0.0;
 	int iter = param->iter;
 
 	c_re = (x - m_x) / zoom + dx;
-	c_im = (y - m_y) / zoom + dy;
+	c_im = (y - m_y) * CONST_HW / zoom + dy;
 	re[NEW] = c_re;
 	im[NEW] = c_im;
 	while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
@@ -50,6 +50,7 @@ void	ft_test(int id, int *data, t_param *param) {
 		im[NEW] = 2 * im[OLD] * re[OLD] + c_im;
 		re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + c_re;
 	}
+
 	if (i < iter)
 		data[id] = 0xFFFFFF;
 	else

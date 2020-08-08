@@ -14,7 +14,5 @@
 
 void	ft_clear_image(t_pict *pic)
 {
-	ft_memset8((void *)pic->index, DEFAULT_INDEX, pic->count_byte);
 	ft_memset8((void *)pic->addr, BACKGROUND_COLOR, pic->count_byte);
-	ft_memset8((void *)pic->z_buffer, MIN_INTEGER, pic->count_byte);
 }

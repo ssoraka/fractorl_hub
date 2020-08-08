@@ -35,24 +35,8 @@ int		ft_create_img(t_pict *pic, void *mlx, int width, int height)
 		return (FALSE);
 	pic->count_line = height;
 	pic->count_byte = width * height * sizeof(int);
-	if (!(pic->z_buffer = (int *)ft_memalloc(pic->count_byte)))
-		return (FALSE);
-	if (!(pic->addr_copy = (int *)ft_memalloc(pic->count_byte)))
-		return (FALSE);
-	if (!(pic->z_buffer_copy = (int *)ft_memalloc(pic->count_byte)))
-		return (FALSE);
-	if (!(pic->index = (int *)ft_memalloc(pic->count_byte)))
-		return (FALSE);
 	ft_clear_image(pic);
 	return (TRUE);
-}
-
-void	ft_destroy_img(t_pict *pic)
-{
-	ft_memdel((void **)&(pic->z_buffer));
-	ft_memdel((void **)&(pic->addr_copy));
-	ft_memdel((void **)&(pic->z_buffer_copy));
-	ft_memdel((void **)&(pic->index));
 }
 
 t_vis	*ft_create_mlx(int width, int heigth, char *name)
@@ -75,7 +59,6 @@ t_vis	*ft_destroy_mlx(t_vis **vis)
 {
 	if (*vis)
 	{
-		ft_destroy_img(&((*vis)->pic));
 		mlx_destroy_image((*vis)->mlx, (*vis)->pic.img);
 		mlx_destroy_window((*vis)->mlx, (*vis)->win);
 		ft_memdel((void **)vis);
