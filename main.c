@@ -74,9 +74,6 @@ void	ft_my_function(t_all *all)
 		x++;
 	}
 	mlx_put_image_to_window(all->vis->mlx, all->vis->win, all->vis->pic.img, 0, 0);
-
-	printf("%lf_%lf\n", all->vis->param.center.x, all->vis->param.center.y);
-	printf("m:%lf_%lf\n", all->vis->param.mouse.x, all->vis->param.mouse.y);
 }
 
 

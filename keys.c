@@ -47,7 +47,7 @@ int		ft_csale_picture(t_param *param, int button)
 	new_mouse.y = (param->mouse.y - param->center.y);
 
 	param->center.x += (new_mouse.x - new_mouse.x * coeff);
-//	param->center.y += (new_mouse.y - new_mouse.y * coeff);
+	param->center.y += (new_mouse.y - new_mouse.y * coeff);
 	param->len *= coeff;
 	return (TRUE);
 }
