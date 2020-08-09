@@ -65,8 +65,6 @@
 
 # define WHITE_COLOR 0xFFFFFF
 # define BLACK_COLOR 0x0
-# define DEFAULT_COLOR -1
-# define UNPRINTABLE -100
 
 # define ZERO_COLOR 0xFF00
 # define UP_COLOR 0xFF0000
@@ -80,24 +78,21 @@
 
 # define MSG_ERROR1 "Malloc error\0\0Not valid map\0File not found"
 
-# define DELTA_Z 0.01
-# define SPEED 10
-# define ROTATE_ANGLE 0.05 / 180.0
+
 
 /*
 **	images
 */
 # define CONST_LEN 500
 # define CONST_WIDTH 500
-# define CONST_HEINTH 500
+# define CONST_HEINTH 340
 # define CONST_HW (((double)CONST_HEINTH) / CONST_WIDTH)
 
 
 # define CAM_X (CONST_WIDTH / 2)
 # define CAM_Y (CONST_HEINTH / 2)
-# define RADIUS 3
 
-# define DEFAULT_INDEX 0
+
 # define MIN_INTEGER 0x80000000
 
 typedef enum	e_form

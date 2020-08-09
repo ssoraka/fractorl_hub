@@ -14,8 +14,6 @@
 
 # define NEW 0
 # define OLD 1
-# define HEIGHT CONST_HEINTH
-# define WIDTH CONST_WIDTH
 
 void	ft_test(int id, int *data, t_param *param) {
 
@@ -29,8 +27,8 @@ void	ft_test(int id, int *data, t_param *param) {
 	int     y;
 
 	i = 0;
-	x = id % WIDTH;
-	y = id / HEIGHT;
+	x = id % CONST_WIDTH;
+	y = id / CONST_WIDTH;
 
 	double m_x = param->center.x;
 	double m_y = param->center.y;
@@ -40,7 +38,7 @@ void	ft_test(int id, int *data, t_param *param) {
 	int iter = param->iter;
 
 	c_re = (x - m_x) / zoom + dx;
-	c_im = (y - m_y) * CONST_HW / zoom + dy;
+	c_im = (y - m_y) / zoom + dy;
 	re[NEW] = c_re;
 	im[NEW] = c_im;
 	while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
@@ -59,15 +57,26 @@ void	ft_test(int id, int *data, t_param *param) {
 
 void	ft_my_function(t_all *all)
 {
+	int x;
+	int y;
 	int id;
 
-	id = 0;
-	while (id < CONST_HEINTH * CONST_WIDTH)
+	x = 0;
+	while (x < CONST_WIDTH)
 	{
-		ft_test(id, all->vis->pic.addr, &all->vis->param);
-		id++;
+		y = 0;
+		while (y < CONST_HEINTH)
+		{
+			id = y * CONST_WIDTH + x;
+			ft_test(id, all->vis->pic.addr, &all->vis->param);
+			y++;
+		}
+		x++;
 	}
 	mlx_put_image_to_window(all->vis->mlx, all->vis->win, all->vis->pic.img, 0, 0);
+
+	printf("%lf_%lf\n", all->vis->param.center.x, all->vis->param.center.y);
+	printf("m:%lf_%lf\n", all->vis->param.mouse.x, all->vis->param.mouse.y);
 }
 
 
@@ -118,7 +127,7 @@ int		main(int argc, char **argv)
 		return (ft_print_usage());
 	if (ft_init_all(&all) == FAIL)
 		ft_exit(&all, MSG_ERROR1);
-//	all.vis->param.centr = ft_arr_get(all.points, 0);
+
 	ft_init_hooks(&all);
 	mlx_loop(all.vis->mlx);
 	ft_exit(&all, NULL);

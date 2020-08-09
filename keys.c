@@ -13,7 +13,7 @@
 #include "./includes/ft_fdf.h"
 
 #define CAM_SHIFT 20
-#define CAM_SCALE 1.1
+#define CAM_SCALE 1.2
 #define CAM_ROTATE 90
 #define PERSP_SPEED 4
 #define MIN_RADIUS 500
@@ -47,7 +47,7 @@ int		ft_csale_picture(t_param *param, int button)
 	new_mouse.y = (param->mouse.y - param->center.y);
 
 	param->center.x += (new_mouse.x - new_mouse.x * coeff);
-	param->center.y += (new_mouse.y - new_mouse.y * coeff);
+//	param->center.y += (new_mouse.y - new_mouse.y * coeff);
 	param->len *= coeff;
 	return (TRUE);
 }
