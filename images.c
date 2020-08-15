@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_fdf.h"
+#include "./includes/ft_fractol.h"
 
 void	ft_init_params(t_param *param)
 {

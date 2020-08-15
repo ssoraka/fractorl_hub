@@ -13,7 +13,7 @@
 #ifndef FT_FDF_STRUCT_H
 # define FT_FDF_STRUCT_H
 
-# include "ft_fdf.h"
+# include "ft_fractol.h"
 
 typedef double		t_real;
 
@@ -85,6 +85,7 @@ typedef struct		s_vis
 typedef struct		s_all
 {
 	struct s_vis	*vis;
+	struct s_open_cl	*cl;
 
 }					t_all;
 
@@ -98,5 +99,13 @@ typedef struct		s_shape
 	int				form;
 	int				(*print)(t_pict *, t_point *, struct s_shape *);
 }					t_shape;
+
+typedef struct		s_prog
+{
+	char			file[50];
+	char			kernel[50];
+	unsigned int	arg_count;
+	unsigned int	arg[2];
+}					t_prog;
 
 #endif

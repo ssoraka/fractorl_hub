@@ -24,8 +24,10 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <OpenCL/opencl.h>
 # include "mlx.h"
-# include "ft_fdf_struct.h"
+# include "ft_cl_struct.h"
+# include "ft_fractol_struct.h"
 
 # if defined(__linux__)
 #  include "X11/X.h"
@@ -92,8 +94,9 @@
 # define CAM_X (CONST_WIDTH / 2)
 # define CAM_Y (CONST_HEINTH / 2)
 
-
 # define MIN_INTEGER 0x80000000
+
+t_prog    g_compile[PROGRAMS_COUNT + 1];
 
 typedef enum	e_form
 {
@@ -109,6 +112,23 @@ typedef enum	e_form
 void		ft_exit(t_all *all, char *error_message);
 void		ft_my_function(t_all *all);
 
+/*
+**	open_cl.c
+*/
+t_open_cl	*ft_init_open_cl(void);
+void		ft_free_open_cl(t_open_cl **open_cl);
+int			ft_run_kernels(t_open_cl *cl);
+int			ft_set_kernel_arg(t_open_cl *cl, t_prog *compile);
+int 		ft_create_all_buffers(t_open_cl *cl);
+int			ft_create_buffers(t_open_cl *cl, int num, int need_wait);
+int			ft_write_buffers(t_open_cl *cl, int num, int need_wait);
+int			ft_read_buffers(t_open_cl *cl, int num, int need_wait);
+int			ft_read_and_build_programs(t_open_cl *cl, t_prog *compile);
+
+/*
+**	read_program.c
+*/
+int		is_read_programm(char *buffer, char *filename);
 /*
 **	hooks.c
 */

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_fdf.h"
+#include "./includes/ft_fractol.h"
 
 #define CAM_SHIFT 20
 #define CAM_SCALE 1.2

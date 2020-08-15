@@ -16,7 +16,7 @@ SRCS = points.c      points2.c \
        images.c     main.c              \
        keys.c       print_shapes.c  \
        hooks.c     \
-       mouse.c    picture.c
+       mouse.c    picture.c open_cl.c read_program.c
 OBJS = $(SRCS:.c=.o)
 DEPENDS = ${OBJS:.o=.d} 
 HEAD = -I ./includes/
@@ -29,13 +29,13 @@ endif
 ifeq ($(detected_OS),Linux)
 	MAKES := ./libft/libft.a  libs/minilibx/libmlx.a
 	LIBMAKE := libs/minilibx
-	LIB :=  -L libft -lft -L libs/minilibx -lmlx_Linux -lXext -lX11 -lm
+	LIB :=  -L libft -lft -L libs/minilibx -lmlx_Linux -lXext -lX11 -lm -framework OpenCL
 	HEAD += -I./libs/minilibx/
 endif
 ifeq ($(detected_OS),Darwin) 
 	MAKES = ./libs/libft.a ./libs/minilibx_macos/libmlx.a 
 	LIBMAKE := libs/minilibx_macos
-	LIB := -L libft -lft -L libs/minilibx_macos -lmlx -framework OpenGL -framework Appkit
+	LIB := -L libft -lft -L libs/minilibx_macos -lmlx -framework OpenGL -framework Appkit -framework OpenCL
 	HEAD += -I./libs/minilibx_macos/
 endif
 
@@ -65,3 +65,11 @@ fclean: clean
 	make -C $(LIBMAKE) clean
 
 re: fclean all
+
+# find_library(MLX mlx minilibx/libmlx.a)
+# target_link_libraries(YOUR_PROJECT_NAME
+#         "-framework AppKit"
+#         "-framework OpenGL"
+#         "-framework OpenCL"
+#         ${MLX}
+#         )

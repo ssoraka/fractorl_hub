@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_fdf.h"
+#include "./includes/ft_fractol.h"
 
 int		ft_put_pixel_to_img(t_pict *pic, t_point *p, t_shape *shape)
 {

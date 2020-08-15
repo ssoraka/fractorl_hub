@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_fdf.h"
+#include "./includes/ft_fractol.h"
 
 void	ft_fill_point(t_point *p, int y, int x, int z)
 {

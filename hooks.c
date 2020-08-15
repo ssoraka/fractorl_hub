@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_fdf.h"
+#include "./includes/ft_fractol.h"
 
 int		ft_mouse_press(int button, int x, int y, void *parameters)
 {

@@ -10,10 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_fdf.h"
+#include "./includes/ft_fractol.h"
 
 # define NEW 0
 # define OLD 1
+
+t_prog    g_compile[PROGRAMS_COUNT + 1] =
+{
+		{"kernel.cl", "clear_cell", 2, {IMAGE, PARAM}},
+		{"", "", 0, {0, 0}}
+};
 
 void	ft_test(int id, int *data, t_param *param) {
 
@@ -86,12 +92,26 @@ void	ft_my_function(t_all *all)
 
 
 
-
+void	ft_init_buffers(t_buff *buff, void *image, int count, int size)
+{
+	buff->arr = image;
+	buff->count = count;
+	buff->g_work_size = &buff->count;
+	buff->buff_used = count * size;
+}
 
 int		ft_init_all(t_all *all)
 {
 	ft_bzero((void *)all, sizeof(t_all));
 	if (!(all->vis = ft_create_mlx(CONST_WIDTH, CONST_HEINTH, "fractol")))
+		return (FAIL);
+	if (!(all->cl = ft_init_open_cl()))
+		return (FAIL);
+	ft_init_buffers(&(all->cl->buff[PARAM]), &all->vis->param, 1, sizeof(t_param));
+	ft_init_buffers(&(all->cl->buff[IMAGE]), all->vis->pic.addr, all->vis->pic.count_byte, sizeof(int));
+	if (!ft_create_all_buffers(all->cl))
+		return (FAIL);
+	if (!ft_read_and_build_programs(all->cl, g_compile))
 		return (FAIL);
 	return (SUCCESS);
 }
@@ -100,6 +120,8 @@ void	ft_exit(t_all *all, char *error_message)
 {
 	if (all->vis)
 		ft_destroy_mlx(&all->vis);
+	if (all->cl)
+		ft_free_open_cl(&all->cl);
 	if (error_message)
 	{
 		ft_putendl_fd(error_message, 2);
@@ -115,6 +137,10 @@ int		ft_print_usage(void)
 	return (0);
 }
 
+
+
+
+
 int		main(int argc, char **argv)
 {
 	t_all	all;
@@ -125,8 +151,10 @@ int		main(int argc, char **argv)
 	if (ft_init_all(&all) == FAIL)
 		ft_exit(&all, MSG_ERROR1);
 
-	ft_init_hooks(&all);
-	mlx_loop(all.vis->mlx);
+
+
+//	ft_init_hooks(&all);
+//	mlx_loop(all.vis->mlx);
 	ft_exit(&all, NULL);
 	return (0);
 }
