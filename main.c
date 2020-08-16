@@ -17,7 +17,7 @@
 
 t_prog    g_compile[PROGRAMS_COUNT + 1] =
 {
-		{"kernel.cl", "clear_cell", 2, {IMAGE, PARAM}},
+		{"kernel.cl", "draw", 2, {IMAGE, PARAM}},
 		{"", "", 0, {0, 0}}
 };
 
@@ -113,6 +113,8 @@ int		ft_init_all(t_all *all)
 		return (FAIL);
 	if (!ft_read_and_build_programs(all->cl, g_compile))
 		return (FAIL);
+	if (!ft_set_kernel_arg(all->cl, g_compile))
+		return (FAIL);
 	return (SUCCESS);
 }
 
@@ -151,10 +153,10 @@ int		main(int argc, char **argv)
 	if (ft_init_all(&all) == FAIL)
 		ft_exit(&all, MSG_ERROR1);
 
+	printf("\n");
 
-
-//	ft_init_hooks(&all);
-//	mlx_loop(all.vis->mlx);
+	ft_init_hooks(&all);
+	mlx_loop(all.vis->mlx);
 	ft_exit(&all, NULL);
 	return (0);
 }

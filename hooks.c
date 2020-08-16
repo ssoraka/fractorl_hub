@@ -22,8 +22,11 @@ int		ft_mouse_press(int button, int x, int y, void *parameters)
 	param = &all->vis->param;
 	if (param->exit || !ft_mouse_on_window(x, y))
 		return (0);
-	if (ft_csale_picture(param, button))
-		ft_my_function(all);
+	//if (ft_csale_picture(param, button))
+	//	ft_my_function(all);
+
+
+
 	return (0);
 }
 

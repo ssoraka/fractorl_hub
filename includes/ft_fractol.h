@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fdf.h                                           :+:      :+:    :+:   */
+/*   ft_fractol.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssoraka <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FDF_H
-# define FT_FDF_H
+#ifndef FT_FRACTOL_H
+# define FT_FRACTOL_H
 
 # include "../libft/libft.h"
 # include "ft_buttons.h"
@@ -105,6 +105,20 @@ typedef enum	e_form
 	RECTANGLE,
 	CIRCLE
 }				t_form;
+
+typedef enum	e_fract
+{
+	MAND,
+	JUL,
+	MY_1,
+	MY_2,
+	BRN_SP,
+	CEL_MAN,
+	CEL_MANBAR,
+	CEL_PER,
+	SPIDER,
+	FRACT_COUNT
+}				t_fract;
 
 /*
 **	main.c
