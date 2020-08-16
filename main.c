@@ -63,6 +63,12 @@ void	ft_test(int id, int *data, t_param *param) {
 
 void	ft_my_function(t_all *all)
 {
+
+//	ft_write_buffers(all->cl, PARAM, TRUE);
+//	ft_run_kernels(all->cl);
+//	ft_read_buffers(all->cl, IMAGE, TRUE);
+
+
 	int x;
 	int y;
 	int id;
@@ -107,8 +113,8 @@ int		ft_init_all(t_all *all)
 		return (FAIL);
 	if (!(all->cl = ft_init_open_cl()))
 		return (FAIL);
-	ft_init_buffers(&(all->cl->buff[PARAM]), &all->vis->param, 1, sizeof(t_param));
 	ft_init_buffers(&(all->cl->buff[IMAGE]), all->vis->pic.addr, all->vis->pic.count_byte, sizeof(int));
+	ft_init_buffers(&(all->cl->buff[PARAM]), &all->vis->param, 1, sizeof(t_param));
 	if (!ft_create_all_buffers(all->cl))
 		return (FAIL);
 	if (!ft_read_and_build_programs(all->cl, g_compile))

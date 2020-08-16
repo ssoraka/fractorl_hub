@@ -85,7 +85,7 @@
 /*
 **	images
 */
-# define CONST_LEN 500
+# define CONST_LEN 250
 # define CONST_WIDTH 500
 # define CONST_HEINTH 340
 # define CONST_HW (((double)CONST_HEINTH) / CONST_WIDTH)
