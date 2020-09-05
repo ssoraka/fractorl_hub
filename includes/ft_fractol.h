@@ -111,7 +111,7 @@ void		ft_my_function(t_all *all);
 /*
 **	open_cl.c
 */
-t_open_cl	*ft_init_open_cl(void);
+t_open_cl	*ft_init_open_cl(int device);
 void		ft_free_open_cl(t_open_cl **open_cl);
 int			ft_run_kernels(t_open_cl *cl);
 int			ft_set_kernel_arg(t_open_cl *cl, t_prog *compile);

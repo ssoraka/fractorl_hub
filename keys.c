@@ -43,6 +43,7 @@ int		ft_csale_picture(t_param *param, int button)
 
 int		ft_press_key(int key, t_param *param)
 {
+	printf("key %d\n", key);
 	if (key == KEY_ESC)
 		param->exit = TRUE;
 	else if (key == KEY_DOWN)

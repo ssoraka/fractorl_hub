@@ -118,7 +118,7 @@ int		ft_init_all(t_all *all)
 	ft_bzero((void *)all, sizeof(t_all));
 	if (!(all->vis = ft_create_mlx(CONST_WIDTH, CONST_HEINTH, "fractol")))
 		return (FAIL);
-	if (!(all->cl = ft_init_open_cl()))
+	if (!(all->cl = ft_init_open_cl(CL_DEVICE_TYPE_GPU)))
 		return (FAIL);
 	ft_init_buffers(&(all->cl->buff[IMAGE]), all->vis->pic.addr, all->vis->pic.count_byte / sizeof(int), sizeof(int));
 	ft_init_buffers(&(all->cl->buff[PARAM]), &all->vis->param, 1, sizeof(t_param));
@@ -148,7 +148,16 @@ void	ft_exit(t_all *all, char *error_message)
 int		ft_print_usage(void)
 {
 	ft_putendl("usage:");
-	ft_putendl("./fractol");
+	ft_putendl("./fractol mandel");
+	ft_putendl("\tMandelbrot set:\t\t0");
+	ft_putendl("\tJulia:\t\t\t1");
+	ft_putendl("\tMy_1:\t\t\t2");
+	ft_putendl("\tMy_2:\t\t\t3");
+	ft_putendl("\tBurning ship:\t\t4");
+	ft_putendl("\tCeltic Mandelbrot:\t5");
+	ft_putendl("\tCeltic Mandelbar:\t6");
+	ft_putendl("\tCeltic Perpendicular:\t7");
+	ft_putendl("\tSpider:\t\t\t8");
 	return (0);
 }
 
@@ -159,15 +168,14 @@ int		ft_print_usage(void)
 int		main(int argc, char **argv)
 {
 	t_all	all;
-	int		status;
 
-	if (argc != 2)
+	if (argc != 2 || ft_atoi(argv[1]) >= FRACT_COUNT
+	|| ft_atoi(argv[1]) < MAND || ft_strlen(argv[1]) > 2)
 		return (ft_print_usage());
 	if (ft_init_all(&all) == FAIL)
 		ft_exit(&all, MSG_ERROR1);
-
-	printf("\n");
-
+	all.vis->param.style = ft_atoi(argv[1]);
+	ft_my_function(&all);
 	ft_init_hooks(&all);
 	mlx_loop(all.vis->mlx);
 	ft_exit(&all, NULL);

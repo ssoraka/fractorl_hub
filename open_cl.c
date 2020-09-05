@@ -64,7 +64,7 @@ void	*ft_cl_error(t_open_cl *cl, char *message)
 	return (NULL);
 }
 
-t_open_cl	*ft_init_open_cl(void)
+t_open_cl	*ft_init_open_cl(int device)
 {
 	t_open_cl *cl;
 
@@ -72,7 +72,7 @@ t_open_cl	*ft_init_open_cl(void)
 		return (ft_cl_error(cl, "malloc error!!!\n"));
 	if (clGetPlatformIDs(1, &cl->platform, &cl->num_platform) != CL_SUCCESS)
 		return (ft_cl_error(cl, "platform error!!!\n"));
-	cl->device_type = CL_DEVICE_TYPE_GPU;
+	cl->device_type = device;
 	if (clGetDeviceIDs(cl->platform, cl->device_type, 1, &cl->device, &cl->num_devices) != CL_SUCCESS)
 		return (ft_cl_error(cl, "device error!!!\n"));
 	cl->context = clCreateContext(NULL, cl->num_devices, &cl->device, &pfn_notify, NULL, &cl->errcode_ret);
