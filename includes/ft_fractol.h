@@ -86,10 +86,6 @@
 **	images
 */
 # define CONST_LEN 250
-# define CONST_WIDTH 500
-# define CONST_HEINTH 340
-# define CONST_HW (((double)CONST_HEINTH) / CONST_WIDTH)
-
 
 # define CAM_X (CONST_WIDTH / 2)
 # define CAM_Y (CONST_HEINTH / 2)
@@ -105,20 +101,6 @@ typedef enum	e_form
 	RECTANGLE,
 	CIRCLE
 }				t_form;
-
-typedef enum	e_fract
-{
-	MAND,
-	JUL,
-	MY_1,
-	MY_2,
-	BRN_SP,
-	CEL_MAN,
-	CEL_MANBAR,
-	CEL_PER,
-	SPIDER,
-	FRACT_COUNT
-}				t_fract;
 
 /*
 **	main.c

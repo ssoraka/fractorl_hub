@@ -21,17 +21,6 @@
 #define MIN_SCALE 0.01
 #define MAX_SCALE 1000.0
 
-int		ft_persp_and_csale(t_param *param, int key)
-{
-	if (key == KEY_PLUS)
-		param->len *= CAM_SCALE;
-	else if (key == KEY_MINUS && param->len > MIN_SCALE)
-		param->len /= CAM_SCALE;
-	else
-		return (FALSE);
-	return (TRUE);
-}
-
 int		ft_csale_picture(t_param *param, int button)
 {
 	double coeff;
@@ -52,15 +41,45 @@ int		ft_csale_picture(t_param *param, int button)
 	return (TRUE);
 }
 
+int		ft_press_key(int key, t_param *param)
+{
+	if (key == KEY_ESC)
+		param->exit = TRUE;
+	else if (key == KEY_DOWN)
+		param->style++;
+	else if (key == KEY_UP)
+		param->style--;
+	else if (key == KEY_LEFT)
+		param->fract++;
+	else if (key == KEY_RIGHT)
+		param->fract--;
+	else if (key == KEY_PLUS)
+		param->iter += 4;
+	else if (key == KEY_MINUS && param->iter > 4)
+		param->iter -= 4;
+	else
+		return (FAIL);
+	if (param->style >= STYLE_COUNT)
+		param->style = STYLE_ONE;
+	if (param->style < STYLE_ONE)
+		param->style = STYLE_COUNT - 1;
+	if (param->fract >= FRACT_COUNT)
+		param->fract = MAND;
+	if (param->fract < MAND)
+		param->fract = FRACT_COUNT - 1;
+	return (SUCCESS);
+}
+
 int		ft_deal_key(int key, void *parametrs)
 {
 	t_param *param;
+	t_all *all;
 
-	param = (t_param *)parametrs;
-	if (key == KEY_ESC)
-		param->exit = TRUE;
-	else
-		return (FAIL);
-	param->is_points_change = TRUE;
+	all = (t_all *)parametrs;
+	param = &all->vis->param;
+	if (param->exit)
+		return (SUCCESS);
+	if (ft_press_key(key, param) == SUCCESS)
+		ft_my_function(all);
 	return (SUCCESS);
 }

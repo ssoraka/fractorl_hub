@@ -64,27 +64,34 @@ void	ft_test(int id, int *data, t_param *param) {
 void	ft_my_function(t_all *all)
 {
 
-//	ft_write_buffers(all->cl, PARAM, TRUE);
-//	ft_run_kernels(all->cl);
-//	ft_read_buffers(all->cl, IMAGE, TRUE);
+	t_param *param = &all->vis->param;
+
+	static int a;
+
+	ft_memset8(all->vis->pic.addr, a, all->vis->pic.count_byte);
+	a = (char)(a + 1);
+	ft_write_buffers(all->cl, PARAM, TRUE);
+//	ft_write_buffers(all->cl, IMAGE, TRUE);
+	ft_run_kernels(all->cl);
+	ft_read_buffers(all->cl, IMAGE, TRUE);
 
 
-	int x;
-	int y;
-	int id;
-
-	x = 0;
-	while (x < CONST_WIDTH)
-	{
-		y = 0;
-		while (y < CONST_HEINTH)
-		{
-			id = y * CONST_WIDTH + x;
-			ft_test(id, all->vis->pic.addr, &all->vis->param);
-			y++;
-		}
-		x++;
-	}
+//	int x;
+//	int y;
+//	int id;
+//
+//	x = 0;
+//	while (x < CONST_WIDTH)
+//	{
+//		y = 0;
+//		while (y < CONST_HEINTH)
+//		{
+//			id = y * CONST_WIDTH + x;
+//			ft_test(id, all->vis->pic.addr, &all->vis->param);
+//			y++;
+//		}
+//		x++;
+//	}
 	mlx_put_image_to_window(all->vis->mlx, all->vis->win, all->vis->pic.img, 0, 0);
 }
 
@@ -113,7 +120,7 @@ int		ft_init_all(t_all *all)
 		return (FAIL);
 	if (!(all->cl = ft_init_open_cl()))
 		return (FAIL);
-	ft_init_buffers(&(all->cl->buff[IMAGE]), all->vis->pic.addr, all->vis->pic.count_byte, sizeof(int));
+	ft_init_buffers(&(all->cl->buff[IMAGE]), all->vis->pic.addr, all->vis->pic.count_byte / sizeof(int), sizeof(int));
 	ft_init_buffers(&(all->cl->buff[PARAM]), &all->vis->param, 1, sizeof(t_param));
 	if (!ft_create_all_buffers(all->cl))
 		return (FAIL);

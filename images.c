@@ -21,6 +21,8 @@ void	ft_init_params(t_param *param)
 	param->center.x = CONST_WIDTH / 2;
 	param->center.y = CONST_HEINTH / 2;
 	param->iter = 100;
+	param->style = STYLE_ONE;
+	param->fract = MAND;
 	param->len = CONST_LEN;
 
 	param->is_points_change = TRUE;

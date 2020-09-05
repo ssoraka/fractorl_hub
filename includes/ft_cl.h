@@ -13,6 +13,32 @@
 #ifndef FT_CL_H
 # define FT_CL_H
 
+# define CONST_WIDTH 1000
+# define CONST_HEINTH 1000
+
+typedef enum	e_fract
+{
+	MAND,
+	JUL,
+	MY_1,
+	MY_2,
+	BRN_SP,
+	CEL_MAN,
+	CEL_MANBAR,
+	CEL_PER,
+	SPIDER,
+	FRACT_COUNT
+}				t_fract;
+
+typedef enum	e_color_style
+{
+	STYLE_ONE,
+	STYLE_TWO,
+	STYLE_THREE,
+	STYLE_FOUR,
+	STYLE_COUNT
+}				t_color_style;
+
 typedef double		t_real;
 
 typedef struct		s_point
@@ -65,6 +91,8 @@ typedef struct		s_param
 	int				is_points_change;
 
 	int				iter;
+	int				style;
+	int				fract;
 	double			len;
 
 	struct s_dpoint d;

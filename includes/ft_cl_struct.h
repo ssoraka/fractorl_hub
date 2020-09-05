@@ -25,6 +25,13 @@ typedef enum	e_buf
 	BUFFER_COUNT
 }				t_buf;
 
+typedef enum	e_device
+{
+	CPU,
+	GPU,
+	DEVICE_TYPES
+}				t_device;
+
 typedef struct		s_buff
 {
 	cl_mem			buffer;

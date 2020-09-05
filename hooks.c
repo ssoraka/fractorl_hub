@@ -68,12 +68,10 @@ int		ft_mouse_move(int x, int y, void *parameters)
 
 void	ft_init_hooks(t_all *all)
 {
-	void *param;
 	void *win;
 
-	param = (void *)&all->vis->param;
 	win = all->vis->win;
-	mlx_hook(win, KEY_PRESS, KEY_PRESS_MASK, ft_deal_key, param);
+	mlx_hook(win, KEY_PRESS, KEY_PRESS_MASK, ft_deal_key, (void *)all);
 	mlx_hook(win, MOTION_NOTIFY, POINTER_MOTION_MASK, ft_mouse_move,
 			(void *)all);
 	mlx_hook(win, BUTTON_PRESS, BUTTON_PRESS_MASK, ft_mouse_press,
