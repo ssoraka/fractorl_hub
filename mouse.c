@@ -25,5 +25,15 @@ int		ft_mouse_get_new_pos(int x, int y, t_param *param)
 		return (FALSE);
 	param->mouse.x = x;
 	param->mouse.y = y;
+	if (param->is_const_change)
+	{
+		param->jul.x = ((double)x - (double)CONST_WIDTH / 2) * 0.002;
+		param->jul.y = ((double)y - (double)CONST_WIDTH / 2) * 0.002;
+	}
+	if (param->fract != JUL)
+	{
+		param->jul.x = 0;
+		param->jul.y = 0;
+	}
 	return (TRUE);
 }

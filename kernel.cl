@@ -75,8 +75,8 @@ __kernel void draw(__global int *data, __global t_param *param)
    	 		{
     			re[OLD] = re[NEW];
         		im[OLD] = im[NEW];
-        		im[NEW] = 2 * im[OLD] * re[OLD] + param->center.y;
-        	    re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + param->center.x;
+        		im[NEW] = 2 * im[OLD] * re[OLD] + param->jul.y;
+        	    re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + param->jul.x;
     		}
     	}
     	else if (type == MY_1)

@@ -22,6 +22,8 @@ int		ft_mouse_press(int button, int x, int y, void *parameters)
 	param = &all->vis->param;
 	if (param->exit || !ft_mouse_on_window(x, y))
 		return (0);
+	if (button == LEFT_BUTTON && param->fract == JUL)
+		param->is_const_change = !param->is_const_change;
 	if (ft_csale_picture(param, button))
 		ft_my_function(all);
 	//тут надо бы вставить вызов кернела
@@ -58,8 +60,9 @@ int		ft_mouse_move(int x, int y, void *parameters)
 		ft_exit(all, NULL);
 	if (!ft_mouse_get_new_pos(x, y, param))
 		return (0);
-//	if (ft_is_cam_moved(param))
-//		param->is_points_change = TRUE;
+	if (param->is_const_change)
+		ft_my_function(all);
+
 //	mlx_do_sync(all->vis->mlx);
 	return (0);
 }

@@ -25,7 +25,7 @@ void	ft_init_params(t_param *param)
 	param->fract = MAND;
 	param->len = CONST_LEN;
 
-	param->is_points_change = TRUE;
+	param->is_const_change = FALSE;
 }
 
 int		ft_create_img(t_pict *pic, void *mlx, int width, int height)

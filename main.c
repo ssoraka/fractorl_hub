@@ -148,7 +148,7 @@ void	ft_exit(t_all *all, char *error_message)
 int		ft_print_usage(void)
 {
 	ft_putendl("usage:");
-	ft_putendl("./fractol mandel");
+	ft_putendl("./fractol [fractal num]");
 	ft_putendl("\tMandelbrot set:\t\t0");
 	ft_putendl("\tJulia:\t\t\t1");
 	ft_putendl("\tMy_1:\t\t\t2");
@@ -158,6 +158,11 @@ int		ft_print_usage(void)
 	ft_putendl("\tCeltic Mandelbar:\t6");
 	ft_putendl("\tCeltic Perpendicular:\t7");
 	ft_putendl("\tSpider:\t\t\t8");
+	ft_putendl("=================================");
+	ft_putendl("\"+\"/\"-\" - move forward/away");
+	ft_putendl("LEFT MOUSE - change constant for Julia");
+	ft_putendl("UP,DOWN - change colors");
+	ft_putendl("LEFT,RIGHT - change fractal");
 	return (0);
 }
 
@@ -174,7 +179,7 @@ int		main(int argc, char **argv)
 		return (ft_print_usage());
 	if (ft_init_all(&all) == FAIL)
 		ft_exit(&all, MSG_ERROR1);
-	all.vis->param.style = ft_atoi(argv[1]);
+	all.vis->param.fract = ft_atoi(argv[1]);
 	ft_my_function(&all);
 	ft_init_hooks(&all);
 	mlx_loop(all.vis->mlx);

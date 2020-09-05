@@ -88,7 +88,7 @@ typedef struct		s_oxyz
 typedef struct		s_param
 {
 	int				exit;
-	int				is_points_change;
+	int				is_const_change;
 
 	int				iter;
 	int				style;
@@ -96,6 +96,7 @@ typedef struct		s_param
 	double			len;
 
 	struct s_dpoint d;
+	struct s_dpoint jul;
 	struct s_dpoint	mouse;
 	struct s_dpoint	center;
 

@@ -82,5 +82,7 @@ int		ft_deal_key(int key, void *parametrs)
 		return (SUCCESS);
 	if (ft_press_key(key, param) == SUCCESS)
 		ft_my_function(all);
+	if (param->fract != JUL)
+		param->is_const_change = FALSE;
 	return (SUCCESS);
 }
