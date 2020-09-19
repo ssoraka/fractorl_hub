@@ -37,7 +37,7 @@ ifeq ($(detected_OS),Linux)
 	LIB :=  -L libft -lft -L libs/minilibx -lmlx_Linux -lXext -lX11 -lm -framework OpenCL
 	HEAD += -I./libs/minilibx/
 endif
-ifeq ($(detected_OS),Darwin) 
+ifeq ($(detected_OS),Darwin)
 	MAKES = ./libft/libft.a ./libs/minilibx_macos/libmlx.a
 	LIBMAKE := libs/minilibx_macos
 	LIB := -L libft -lft -L libs/minilibx_macos -lmlx -framework OpenGL -framework Appkit -framework OpenCL
@@ -45,14 +45,14 @@ ifeq ($(detected_OS),Darwin)
 endif
 
 .PHONY: clean fclean re
-all: $(NAME)
+all: libs_refresh $(NAME)
 
 %.o: %.c ${SOURCE_HEADERS}
 	$(GCC) -c  $(HEAD) $<
 
-$(MAKES):
-	make -C  ./libft/
-	make -sC  $(LIBMAKE)
+libs_refresh:
+	@make -C ./libft/
+	@make -sC  $(LIBMAKE)
 
 $(NAME): $(MAKES) $(OBJS)
 	$(GCC) $(OBJS)  $(LIB) $(HEAD)  -o $(NAME)
