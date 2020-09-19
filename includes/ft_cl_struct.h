@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cl_struct.h                                   :+:      :+:    :+:   */
+/*   ft_cl_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssoraka <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,28 +18,28 @@
 # define PROGRAMS_COUNT 1
 # define PROGRAMM_SIZE 10000
 
-typedef enum	e_buf
+typedef enum		e_buf
 {
-	PARAM = 0, //буффер параметров
-	IMAGE, //буфер изображения
+	PARAM = 0,
+	IMAGE,
 	BUFFER_COUNT
-}				t_buf;
+}					t_buf;
 
-typedef enum	e_device
+typedef enum		e_device
 {
 	CPU,
 	GPU,
 	DEVICE_TYPES
-}				t_device;
+}					t_device;
 
-typedef struct		s_buff
+typedef struct			s_buff
 {
-	cl_mem			buffer;
-	void			*arr;
-	size_t			count;
-	size_t			*g_work_size;
-	size_t			buff_used;
-}					t_buff;
+	cl_mem				buffer;
+	void				*arr;
+	size_t				count;
+	size_t				*g_work_size;
+	size_t				buff_used;
+}						t_buff;
 
 typedef struct			s_open_cl
 {

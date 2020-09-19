@@ -23,8 +23,8 @@
 
 int		ft_csale_picture(t_param *param, int button)
 {
-	double coeff;
-	t_dpoint new_mouse;
+	double		coeff;
+	t_dpoint	new_mouse;
 
 	if (button == MIDDLE_FORW_BUTTON)
 		coeff = CAM_SCALE;
@@ -34,7 +34,6 @@ int		ft_csale_picture(t_param *param, int button)
 		return (FALSE);
 	new_mouse.x = (param->mouse.x - param->center.x);
 	new_mouse.y = (param->mouse.y - param->center.y);
-
 	param->center.x += (new_mouse.x - new_mouse.x * coeff);
 	param->center.y += (new_mouse.y - new_mouse.y * coeff);
 	param->len *= coeff;
@@ -43,7 +42,6 @@ int		ft_csale_picture(t_param *param, int button)
 
 int		ft_press_key(int key, t_param *param)
 {
-	printf("key %d\n", key);
 	if (key == KEY_ESC)
 		param->exit = TRUE;
 	else if (key == KEY_DOWN)
@@ -73,8 +71,8 @@ int		ft_press_key(int key, t_param *param)
 
 int		ft_deal_key(int key, void *parametrs)
 {
-	t_param *param;
-	t_all *all;
+	t_param	*param;
+	t_all	*all;
 
 	all = (t_all *)parametrs;
 	param = &all->vis->param;

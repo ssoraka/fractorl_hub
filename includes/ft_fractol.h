@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include "ft_buttons.h"
-
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -25,12 +24,12 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <OpenCL/opencl.h>
-# include "mlx.h"
 # include "ft_cl_struct.h"
 # include "ft_fractol_struct.h"
 
 # if defined(__linux__)
 #  include "X11/X.h"
+#  include "../libs/minilibx/mlx.h"
 #  define KEY_PRESS_MASK KeyPressMask
 #  define POINTER_MOTION_MASK PointerMotionMask
 #  define BUTTON_PRESS_MASK ButtonPressMask
@@ -41,6 +40,7 @@
 #  define BUTTON_RELEASE ButtonRelease
 #  define MOTION_NOTIFY MotionNotify
 # else
+#  include "../libs/minilibx_macos/mlx.h"
 #  define KEY_PRESS_MASK 0
 #  define POINTER_MOTION_MASK 0
 #  define BUTTON_PRESS_MASK 0
@@ -78,9 +78,7 @@
 # define ACTIVE_COLOR RED_COLOR
 # define CREATE_COLOR BLUE_COLOR
 
-# define MSG_ERROR1 "Malloc error\0\0Not valid map\0File not found"
-
-
+# define MSG_ERROR1 "Fatal error"
 
 /*
 **	images
@@ -92,7 +90,7 @@
 
 # define MIN_INTEGER 0x80000000
 
-t_prog    g_compile[PROGRAMS_COUNT + 1];
+t_prog	g_compile[PROGRAMS_COUNT + 1];
 
 typedef enum	e_form
 {
@@ -109,27 +107,35 @@ void		ft_exit(t_all *all, char *error_message);
 void		ft_my_function(t_all *all);
 
 /*
-**	open_cl.c
+**	open_cl_buffers.c
 */
-t_open_cl	*ft_init_open_cl(int device);
-void		ft_free_open_cl(t_open_cl **open_cl);
-int			ft_run_kernels(t_open_cl *cl);
-int			ft_set_kernel_arg(t_open_cl *cl, t_prog *compile);
-int 		ft_create_all_buffers(t_open_cl *cl);
-int			ft_create_buffers(t_open_cl *cl, int num, int need_wait);
+int			ft_create_all_buffers(t_open_cl *cl);
+int			ft_create_buffers(t_open_cl *cl, int num);
 int			ft_write_buffers(t_open_cl *cl, int num, int need_wait);
 int			ft_read_buffers(t_open_cl *cl, int num, int need_wait);
-int			ft_read_and_build_programs(t_open_cl *cl, t_prog *compile);
 
 /*
-**	read_program.c
+**	open_cl_read_build_run.c
 */
-int		is_read_programm(char *buffer, char *filename);
+int			is_read_programm(char *buffer, char *filename);
+int			ft_read_and_build_programs(t_open_cl *cl, t_prog *compile);
+int			ft_run_kernels(t_open_cl *cl);
+int			ft_set_kernel_arg(t_open_cl *cl, t_prog *compile);
+
+/*
+**	open_cl_init.c
+*/
+t_open_cl	*ft_init_open_cl(int device);
+
+/*
+**	open_cl_free.c
+*/
+void		ft_free_open_cl(t_open_cl **open_cl);
+
 /*
 **	hooks.c
 */
 int			ft_mouse_press(int button, int x, int y, void *parameters);
-int			ft_mouse_release(int button, int x, int y, void *parameters);
 int			ft_mouse_move(int x, int y, void *parameters);
 int			ft_loop_hook(void *parameters);
 void		ft_init_hooks(t_all *all);
@@ -146,7 +152,6 @@ void		ft_try_change_active_point(t_param *param, t_vektr *active);
 **	print_shapes.c
 */
 void		ft_init_shape(t_shape *shape, t_form form, t_bool is_particle);
-
 
 /*
 **	images.c
@@ -186,5 +191,10 @@ void		ft_normilize_vektor(t_dpoint *vek);
 void		ft_get_perp_vekt_from_two(t_dpoint *answer, t_dpoint *a,
 		t_dpoint *b);
 t_dpoint	ft_ret_norm(t_dpoint *a, t_dpoint *b, t_dpoint *c);
+
+/*
+**	usage.c
+*/
+int			ft_print_usage(void);
 
 #endif

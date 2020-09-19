@@ -19,7 +19,6 @@ int 		choose_color(int i, int max, int color)
 	int			blue;
 	int			green;
 	double		n;
-//	int			s = 100;
 
 	n = (double)i / (double)max;
 	red = (int)(9 * (1 - n) * pow(n, 3) * 255);
@@ -60,45 +59,45 @@ __kernel void draw(__global int *data, __global t_param *param)
 
 
 		if (type == MAND)
-        {
-    		while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
-   	 		{
-    			re[OLD] = re[NEW];
-        		im[OLD] = im[NEW];
-        		im[NEW] = 2 * im[OLD] * re[OLD] + c_im;
-        	    re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + c_re;
-    		}
-    	}
-    	else if (type == JUL)
-    	{
-    		while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
-   	 		{
-    			re[OLD] = re[NEW];
-        		im[OLD] = im[NEW];
-        		im[NEW] = 2 * im[OLD] * re[OLD] + param->jul.y;
-        	    re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + param->jul.x;
-    		}
-    	}
-    	else if (type == MY_1)
-    	{
-    		while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
-   	 		{
-    			re[OLD] = re[NEW];
-        		im[OLD] = im[NEW];
-        		im[NEW] = -2 * im[OLD] * re[OLD] + c_im;
-        	    re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + c_re;
-    		}
-    	}
-    	else if (type == MY_2)
-    	{
-    		while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
-   	 		{
-    			re[OLD] = re[NEW];
-        		im[OLD] = im[NEW];
-        		im[NEW] = 2 * im[OLD] * re[OLD] * re[OLD] + re[OLD] * re[OLD] * im[OLD] - im[OLD] * im[OLD] * im[OLD] + c_im;
-        	    re[NEW] = re[OLD] * re[OLD] * re[OLD] - im[OLD] * im[OLD] * re[OLD] - 2 * re[OLD] * im[OLD] * im[OLD] + c_re;
-    		}
-    	}
+		{
+			while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
+			{
+				re[OLD] = re[NEW];
+				im[OLD] = im[NEW];
+				im[NEW] = 2 * im[OLD] * re[OLD] + c_im;
+				re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + c_re;
+			}
+		}
+		else if (type == JUL)
+		{
+			while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
+			{
+				re[OLD] = re[NEW];
+				im[OLD] = im[NEW];
+				im[NEW] = 2 * im[OLD] * re[OLD] + param->jul.y;
+				re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + param->jul.x;
+			}
+		}
+		else if (type == MY_1)
+		{
+			while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
+			{
+				re[OLD] = re[NEW];
+				im[OLD] = im[NEW];
+				im[NEW] = -2 * im[OLD] * re[OLD] + c_im;
+				re[NEW] = re[OLD] * re[OLD] - im[OLD] * im[OLD] + c_re;
+			}
+		}
+		else if (type == MY_2)
+		{
+			while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
+			{
+				re[OLD] = re[NEW];
+				im[OLD] = im[NEW];
+				im[NEW] = 2 * im[OLD] * re[OLD] * re[OLD] + re[OLD] * re[OLD] * im[OLD] - im[OLD] * im[OLD] * im[OLD] + c_im;
+				re[NEW] = re[OLD] * re[OLD] * re[OLD] - im[OLD] * im[OLD] * re[OLD] - 2 * re[OLD] * im[OLD] * im[OLD] + c_re;
+			}
+		}
 		else if (type == BRN_SP)
 		{
 			while (re[NEW] * re[NEW] + im[NEW] * im[NEW] < 4 && ++i < iter)
@@ -156,5 +155,4 @@ __kernel void draw(__global int *data, __global t_param *param)
 			data[id] = choose_color(i, iter, param->style);
 		else
 			data[id] = 0;
-
 }

@@ -29,7 +29,6 @@
 # define OR ||
 # define MOD %
 # define DIV /
-
 # include "collections/collections_header.h"
 
 typedef struct		s_list

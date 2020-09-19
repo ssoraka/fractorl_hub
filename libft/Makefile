@@ -13,7 +13,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -c
 NAME = libft.a
-HEADER = .
+HEADER = libft.h
 SRC = ft_abs.c \
 ft_atoi.c \
 ft_bzero.c \
@@ -112,8 +112,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) $< -o $@ -I $(HEADER)
+%.o: %.c ${HEADER}
+	@$(CC) $(CFLAGS) $< -o $@ -I .$(HEADER)
 
 clean:
 	@rm -rf $(OBJS)

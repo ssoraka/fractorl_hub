@@ -14,17 +14,12 @@
 
 void	ft_init_params(t_param *param)
 {
-//	param->cam_x = CAM_X;
-//	param->cam_y = CAM_Y;
-//	param->target_x = CAM_X;
-//	param->target_y = CAM_Y;
 	param->center.x = CONST_WIDTH / 2;
 	param->center.y = CONST_HEINTH / 2;
 	param->iter = 100;
 	param->style = STYLE_ONE;
 	param->fract = MAND;
 	param->len = CONST_LEN;
-
 	param->is_const_change = FALSE;
 }
 

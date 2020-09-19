@@ -10,16 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-GCC = gcc
+GCC = gcc -Wall -Wextra -Werror
 NAME = fractol
-SRCS = points.c      points2.c \
-       images.c     main.c              \
-       keys.c       print_shapes.c  \
-       hooks.c     \
-       mouse.c    picture.c open_cl.c read_program.c
+SRCS =	main.c	\
+		points.c			points2.c	\
+		images.c			picture.c	\
+		keys.c				print_shapes.c	\
+		hooks.c				mouse.c	\
+		open_cl_buffers.c	open_cl_free.c	\
+		open_cl_init.c		open_cl_read_build_run.c	\
+		usage.c
 OBJS = $(SRCS:.c=.o)
-DEPENDS = ${OBJS:.o=.d} 
-HEAD = -I ./includes/
+
+HEADERS = ft_buttons.h ft_cl_struct.h ft_fractol_struct.h ft_cl.h ft_fractol.h
+SOURCE_HEADERS = $(addprefix ./includes/,$(HEADERS))
+HEAD = $(addprefix -I,$(SOURCE_HEADERS))
 
 ifeq ($(OS),Windows_NT)
 	detected_OS := Windows
@@ -33,7 +38,7 @@ ifeq ($(detected_OS),Linux)
 	HEAD += -I./libs/minilibx/
 endif
 ifeq ($(detected_OS),Darwin) 
-	MAKES = ./libs/libft.a ./libs/minilibx_macos/libmlx.a 
+	MAKES = ./libft/libft.a ./libs/minilibx_macos/libmlx.a
 	LIBMAKE := libs/minilibx_macos
 	LIB := -L libft -lft -L libs/minilibx_macos -lmlx -framework OpenGL -framework Appkit -framework OpenCL
 	HEAD += -I./libs/minilibx_macos/
@@ -42,14 +47,12 @@ endif
 .PHONY: clean fclean re
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c ${SOURCE_HEADERS}
 	$(GCC) -c  $(HEAD) $<
 
 $(MAKES):
-	make -C  ./libft
+	make -C  ./libft/
 	make -sC  $(LIBMAKE)
-
--include ${DEPENDS}
 
 $(NAME): $(MAKES) $(OBJS)
 	$(GCC) $(OBJS)  $(LIB) $(HEAD)  -o $(NAME)
@@ -65,11 +68,3 @@ fclean: clean
 	make -C $(LIBMAKE) clean
 
 re: fclean all
-
-# find_library(MLX mlx minilibx/libmlx.a)
-# target_link_libraries(YOUR_PROJECT_NAME
-#         "-framework AppKit"
-#         "-framework OpenGL"
-#         "-framework OpenCL"
-#         ${MLX}
-#         )

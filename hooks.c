@@ -16,7 +16,6 @@ int		ft_mouse_press(int button, int x, int y, void *parameters)
 {
 	t_all	*all;
 	t_param	*param;
-	t_vektr	*active;
 
 	all = (t_all *)parameters;
 	param = &all->vis->param;
@@ -26,24 +25,6 @@ int		ft_mouse_press(int button, int x, int y, void *parameters)
 		param->is_const_change = !param->is_const_change;
 	if (ft_csale_picture(param, button))
 		ft_my_function(all);
-	//тут надо бы вставить вызов кернела
-
-	return (0);
-}
-
-int		ft_mouse_release(int button, int x, int y, void *parameters)
-{
-	t_all	*all;
-	t_param	*param;
-
-	all = (t_all *)parameters;
-	param = &all->vis->param;
-	if (param->exit || !ft_mouse_on_window(x, y))
-		return (0);
-//	if (button == MIDDLE_BUTTON)
-//		param->right_button_press = FALSE;
-//	else if (button == LEFT_BUTTON)
-//		param->left_button_press = FALSE;
 	return (0);
 }
 
@@ -51,10 +32,8 @@ int		ft_mouse_move(int x, int y, void *parameters)
 {
 	t_all	*all;
 	t_param	*param;
-	t_vis *vis;
 
 	all = (t_all *)parameters;
-	vis = all->vis;
 	param = &all->vis->param;
 	if (param->exit)
 		ft_exit(all, NULL);
@@ -62,12 +41,8 @@ int		ft_mouse_move(int x, int y, void *parameters)
 		return (0);
 	if (param->is_const_change)
 		ft_my_function(all);
-
-//	mlx_do_sync(all->vis->mlx);
 	return (0);
 }
-
-
 
 void	ft_init_hooks(t_all *all)
 {
@@ -78,7 +53,5 @@ void	ft_init_hooks(t_all *all)
 	mlx_hook(win, MOTION_NOTIFY, POINTER_MOTION_MASK, ft_mouse_move,
 			(void *)all);
 	mlx_hook(win, BUTTON_PRESS, BUTTON_PRESS_MASK, ft_mouse_press,
-			(void *)all);
-	mlx_hook(win, BUTTON_RELEASE, BUTTON_RELEASE_MASK, ft_mouse_release,
 			(void *)all);
 }
